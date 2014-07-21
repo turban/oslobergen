@@ -9,12 +9,11 @@ Ext.define('TrackApp.Application', {
     name: 'TrackApp',
 
     views: [
-        // TODO: add views here
+        'map.Map'
     ],
 
     controllers: [
         'Root'
-        // TODO: add controllers here
     ],
 
     stores: [

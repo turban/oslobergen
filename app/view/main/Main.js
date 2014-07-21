@@ -20,24 +20,16 @@ Ext.define('TrackApp.view.main.Main', {
     },
 
     items: [{
-        xtype: 'panel',
-        bind: {
-            title: '{name}'
-        },
-        region: 'west',
-        html: '<ul><li>This area is commonly used for navigation, for example, using a "tree" component.</li></ul>',
-        width: 250,
-        split: true,
-        tbar: [{
-            text: 'Button',
-            handler: 'onClickButton'
-        }]
+        xtype: 'map',
+        region: 'center'
     },{
-        region: 'center',
-        xtype: 'tabpanel',
-        items:[{
-            title: 'Tab 1',
-            html: '<h2>Content appropriate for the current navigation.</h2>'
-        }]
+        title: 'Høydekurve',
+        region: 'south',
+        header: false,
+        collapsible: true,
+        split: true,
+        height: 100,
+        minHeight: 75,
+        html: 'Høydekurve'
     }]
 });
