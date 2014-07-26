@@ -21,7 +21,8 @@
      * The name of the theme for this application.
      */
     //"theme": "ext-theme-neptune",
-    "theme": "ext-theme-crisp-touch",
+    "theme": "ext-theme-neptune-touch",
+    //"theme": "ext-theme-crisp-touch",
 
     /**
      * The list of required packages (with optional versions; default is "latest").

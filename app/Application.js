@@ -8,8 +8,15 @@ Ext.define('TrackApp.Application', {
     
     name: 'TrackApp',
 
+    requires: [
+        'TrackApp.config.Runtime'
+    ],
+
     views: [
-        'map.Map'
+        'map.Map',
+        'profile.Profile',
+        'instagram.Instagram',
+        'positions.Positions'
     ],
 
     controllers: [
@@ -17,7 +24,8 @@ Ext.define('TrackApp.Application', {
     ],
 
     stores: [
-        // TODO: add stores here
+        'Track',
+        'Instagram'
     ],
     
     launch: function () {

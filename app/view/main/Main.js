@@ -1,35 +1,72 @@
-/**
- * This class is the main view for the application. It is specified in app.js as the
- * "autoCreateViewport" property. That setting automatically applies the "viewport"
- * plugin to promote that instance of this class to the body element.
- *
- * TODO - Replace this content of this view to suite the needs of your application.
- */
 Ext.define('TrackApp.view.main.Main', {
-    extend: 'Ext.container.Container',
+	extend: 'Ext.panel.Panel',
 
-    xtype: 'app-main',
-    
-    controller: 'main',
-    viewModel: {
-        type: 'main'
-    },
+    requires: [
+        'Ext.resizer.Splitter'
+    ],
 
-    layout: {
-        type: 'border'
-    },
+	xtype: 'app-main',
+	
+	controller: 'main',
 
-    items: [{
-        xtype: 'map',
-        region: 'center'
-    },{
-        title: 'Høydekurve',
-        region: 'south',
-        header: false,
-        collapsible: true,
-        split: true,
-        height: 100,
-        minHeight: 75,
-        html: 'Høydekurve'
-    }]
+	viewModel: {
+		type: 'main'
+	},
+
+	title: 'Oslo-Bergen til fots',
+
+	header: {
+		titlePosition: 0,
+		defaults: {
+			xtype: 'button',
+			toggleGroup: 'menu'
+		},
+		items: [{
+			text: 'Høydeprofil',
+			id: 'profile'
+		},{
+			text: 'Bilder',
+			id: 'instagram'
+		},{
+			text: 'Posisjoner',
+			id: 'positions'
+		},{
+			text: 'Facebook',
+			id: 'facebook'
+		}]
+	},
+
+	layout: {
+		type: 'vbox',
+		pack: 'start',
+		align: 'stretch'
+	},
+
+	items: [{
+		reference: 'map',
+		xtype: 'map',
+		flex: 3
+	}, {
+		reference: 'bottom',
+		xtype: 'panel',
+		flex: 2,
+		//split: true,
+		hidden: true,
+		layout: {
+			type: 'fit'
+		},
+		defaults: {
+			hidden: true,
+		},
+		items: [{
+			reference: 'profile',
+			xtype: 'profile' 
+		},{
+			reference: 'instagram',
+			xtype: 'instagram'			
+		},{
+			reference: 'positions',
+			xtype: 'positions'
+		}]  
+	}]
 });

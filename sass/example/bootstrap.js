@@ -1257,7 +1257,6 @@ Ext.Loader.addClassPathMappings({
   "Ext.scroll.Indicator": "../../ext/src/scroll/Indicator.js",
   "Ext.scroll.Manager": "../../ext/src/scroll/Manager.js",
   "Ext.supports": "../../ext/packages/sencha-core/src/env/Feature.js",
-  "Ext.theme": "../../ext/packages/ext-theme-crisp",
   "Ext.touch": "../../ext/packages/ext-touch-sizing",
   "Ext.util": "../../ext/packages/sencha-core/src/util",
   "Ext.util.Animate": "../../ext/src/util/Animate.js",
@@ -2100,7 +2099,6 @@ Ext.ClassManager.addNameAlternateMappings({
     "Ext.TabPanel"
   ],
   "Ext.tab.Tab": [],
-  "Ext.theme.crisp.view.Table": [],
   "Ext.tip.QuickTip": [
     "Ext.QuickTip"
   ],
@@ -2319,14 +2317,28 @@ Ext.ClassManager.addNameAlternateMappings({
   "ExtThemeNeptune.toolbar.Paging": [],
   "ExtThemeNeptune.toolbar.Toolbar": [],
   "TrackApp.Application": [],
+  "TrackApp.config.Runtime": [],
   "TrackApp.controller.Main": [],
-  "TrackApp.controller.Map": [],
   "TrackApp.controller.Root": [],
+  "TrackApp.model.Instagram": [],
+  "TrackApp.model.Stage": [],
+  "TrackApp.model.Track": [],
+  "TrackApp.store.Instagram": [],
+  "TrackApp.store.Stages": [],
+  "TrackApp.store.Track": [],
+  "TrackApp.view.instagram.Instagram": [],
+  "TrackApp.view.instagram.InstagramController": [],
   "TrackApp.view.main.Main": [],
   "TrackApp.view.main.MainController": [],
   "TrackApp.view.main.MainModel": [],
   "TrackApp.view.map.Map": [],
-  "TrackApp.view.map.MapController": []
+  "TrackApp.view.map.MapController": [],
+  "TrackApp.view.positions.Positions": [],
+  "TrackApp.view.positions.PositionsController": [],
+  "TrackApp.view.profile.Profile": [],
+  "TrackApp.view.profile.ProfileController": [],
+  "TrackApp.view.stages.Stages": [],
+  "TrackApp.view.stages.StagesController": []
 });
 Ext.ClassManager.addNameAliasMappings({
   "Ext.AbstractManager": [],
@@ -3380,7 +3392,6 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.tab.Tab": [
     "widget.tab"
   ],
-  "Ext.theme.crisp.view.Table": [],
   "Ext.tip.QuickTip": [
     "widget.quicktip"
   ],
@@ -3660,9 +3671,21 @@ Ext.ClassManager.addNameAliasMappings({
   "ExtThemeNeptune.toolbar.Paging": [],
   "ExtThemeNeptune.toolbar.Toolbar": [],
   "TrackApp.Application": [],
+  "TrackApp.config.Runtime": [],
   "TrackApp.controller.Main": [],
-  "TrackApp.controller.Map": [],
   "TrackApp.controller.Root": [],
+  "TrackApp.model.Instagram": [],
+  "TrackApp.model.Stage": [],
+  "TrackApp.model.Track": [],
+  "TrackApp.store.Instagram": [],
+  "TrackApp.store.Stages": [],
+  "TrackApp.store.Track": [],
+  "TrackApp.view.instagram.Instagram": [
+    "widget.instagram"
+  ],
+  "TrackApp.view.instagram.InstagramController": [
+    "controller.instagram"
+  ],
   "TrackApp.view.main.Main": [
     "widget.app-main"
   ],
@@ -3677,13 +3700,30 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "TrackApp.view.map.MapController": [
     "controller.map"
+  ],
+  "TrackApp.view.positions.Positions": [
+    "widget.positions"
+  ],
+  "TrackApp.view.positions.PositionsController": [
+    "controller.positions"
+  ],
+  "TrackApp.view.profile.Profile": [
+    "widget.profile"
+  ],
+  "TrackApp.view.profile.ProfileController": [
+    "controller.profile"
+  ],
+  "TrackApp.view.stages.Stages": [
+    "widget.stages"
+  ],
+  "TrackApp.view.stages.StagesController": [
+    "controller.stages"
   ]
 });
 Ext.setVersion("ext", "5.0.0.970");
 Ext.setVersion("ext-theme-base", "5.0.0");
-Ext.setVersion("ext-theme-crisp", "5.0.0");
-Ext.setVersion("ext-theme-crisp-touch", "1.0.0");
 Ext.setVersion("ext-theme-neptune", "5.0.0");
+Ext.setVersion("ext-theme-neptune-touch", "5.0.0");
 Ext.setVersion("ext-theme-neutral", "5.0.0");
 Ext.setVersion("ext-touch-sizing", "1.0.0");
 Ext.setVersion("sencha-core", "5.0.0");
@@ -3711,7 +3751,6 @@ Ext.Loader.loadScriptsSync([
   "../../ext/packages/ext-theme-neptune/overrides/panel/Panel.js",
   "../../ext/overrides/app/Application.js",
   "../../ext/packages/ext-theme-neptune/overrides/panel/Table.js",
-  "../../ext/packages/ext-theme-crisp/overrides/view/Table.js",
   "../../ext/packages/ext-theme-neptune/overrides/resizer/Splitter.js",
   "../../ext/packages/ext-touch-sizing/overrides/resizer/Splitter.js",
   "../../ext/packages/ext-theme-neptune/overrides/container/ButtonGroup.js",

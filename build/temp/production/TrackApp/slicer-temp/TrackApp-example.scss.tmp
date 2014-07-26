@@ -1,5 +1,5 @@
 $image-search-path: '/www/oslobergen/build/production/TrackApp/resources';
-$theme-name:  'ext-theme-crisp-touch' !default;
+$theme-name:  'ext-theme-neptune-touch' !default;
 $include-ext-abstractmanager: true;
 $include-ext-action: true;
 $include-ext-ajax: true;
@@ -541,7 +541,6 @@ $include-ext-state-stateful: true;
 $include-ext-tab-bar: true;
 $include-ext-tab-panel: true;
 $include-ext-tab-tab: true;
-$include-ext-theme-crisp-view-table: true;
 $include-ext-tip-quicktip: true;
 $include-ext-tip-quicktipmanager: true;
 $include-ext-tip-tip: true;
@@ -714,34 +713,38 @@ $include-extthemeneptune-resizer-splitter: true;
 $include-extthemeneptune-toolbar-paging: true;
 $include-extthemeneptune-toolbar-toolbar: true;
 $include-trackapp-application: true;
+$include-trackapp-config-runtime: true;
 $include-trackapp-controller-main: true;
-$include-trackapp-controller-map: true;
 $include-trackapp-controller-root: true;
+$include-trackapp-model-instagram: true;
+$include-trackapp-model-stage: true;
+$include-trackapp-model-track: true;
+$include-trackapp-store-instagram: true;
+$include-trackapp-store-stages: true;
+$include-trackapp-store-track: true;
+$include-trackapp-view-instagram-instagram: true;
+$include-trackapp-view-instagram-instagramcontroller: true;
 $include-trackapp-view-main-main: true;
 $include-trackapp-view-main-maincontroller: true;
 $include-trackapp-view-main-mainmodel: true;
 $include-trackapp-view-map-map: true;
 $include-trackapp-view-map-mapcontroller: true;
+$include-trackapp-view-positions-positions: true;
+$include-trackapp-view-positions-positionscontroller: true;
+$include-trackapp-view-profile-profile: true;
+$include-trackapp-view-profile-profilecontroller: true;
+$include-trackapp-view-stages-stages: true;
+$include-trackapp-view-stages-stagescontroller: true;
 /* including package ext-theme-base */
 @import '../../../../../ext/packages/ext-theme-base/sass/etc/all';
 /* including package ext-theme-neutral */
 @import '../../../../../ext/packages/ext-theme-neutral/sass/etc/all';
 /* including package ext-theme-neptune */
 @import '../../../../../ext/packages/ext-theme-neptune/sass/etc/all';
-/* including package ext-theme-crisp */
-@import '../../../../../ext/packages/ext-theme-crisp/sass/etc/all';
 /* including package ext-touch-sizing */
 @import '../../../../../ext/packages/ext-touch-sizing/sass/etc/all';
-/* including package ext-theme-crisp-touch */
-@import '../../../../../ext/packages/ext-theme-crisp-touch/sass/etc/all';
-/* including package ext-theme-crisp-touch */
-@import '../../../../../ext/packages/ext-theme-crisp-touch/sass/var/resizer/Splitter';
-@import '../../../../../ext/packages/ext-theme-crisp-touch/sass/var/tab/Tab';
-@import '../../../../../ext/packages/ext-theme-crisp-touch/sass/var/tab/Bar';
-@import '../../../../../ext/packages/ext-theme-crisp-touch/sass/var/picker/Date';
-@import '../../../../../ext/packages/ext-theme-crisp-touch/sass/var/grid/feature/Grouping';
-@import '../../../../../ext/packages/ext-theme-crisp-touch/sass/var/grid/plugin/RowExpander';
-@import '../../../../../ext/packages/ext-theme-crisp-touch/sass/var/resizer/Resizer';
+/* including package ext-theme-neptune-touch */
+@import '../../../../../ext/packages/ext-theme-neptune-touch/sass/etc/all';
 /* including package ext-touch-sizing */
 @import '../../../../../ext/packages/ext-touch-sizing/sass/var/Component';
 @import '../../../../../ext/packages/ext-touch-sizing/sass/var/ProgressBar';
@@ -773,30 +776,6 @@ $include-trackapp-view-map-mapcontroller: true;
 @import '../../../../../ext/packages/ext-touch-sizing/sass/var/grid/plugin/RowExpander';
 @import '../../../../../ext/packages/ext-touch-sizing/sass/var/layout/container/Accordion';
 @import '../../../../../ext/packages/ext-touch-sizing/sass/var/slider/Multi';
-/* including package ext-theme-crisp */
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/Component';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/panel/Tool';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/button/Button';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/toolbar/Toolbar';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/panel/Panel';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/tip/Tip';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/form/Labelable';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/form/field/Base';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/view/Table';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/grid/header/Container';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/grid/column/Column';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/resizer/Splitter';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/layout/container/Border';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/tab/Tab';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/tab/Bar';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/window/Window';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/form/field/Tag';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/grid/feature/Grouping';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/grid/filters/Filters';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/grid/locking/Lockable';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/layout/container/Accordion';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/resizer/Resizer';
-@import '../../../../../ext/packages/ext-theme-crisp/sass/var/window/Toast';
 /* including package ext-theme-neptune */
 @import '../../../../../ext/packages/ext-theme-neptune/sass/var/Component';
 @import '../../../../../ext/packages/ext-theme-neptune/sass/var/LoadMask';

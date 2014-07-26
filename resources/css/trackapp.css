@@ -1,0 +1,98 @@
+.map {
+	border-bottom: 1px solid #ccc!important;
+}
+
+.leaflet-marker-live {
+	-webkit-animation: pulse 2s ease-out;
+	animation: pulse 2s ease-out;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+}
+@-webkit-keyframes pulse {
+	from { stroke-width: 15; stroke-opacity: 1; }
+	to { stroke-width: 50; stroke-opacity: 0; }
+}
+@keyframes pulse {
+	from { stroke-width: 15; stroke-opacity: 1; }
+	to { stroke-width: 50; stroke-opacity: 0; }
+}	
+
+.leaflet-label {
+	background: rgb(255, 255, 255);
+	background: rgba(255, 255, 255, 0.81);
+	background-clip: padding-box;
+	border-color: #777;
+	border-color: rgba(0,0,0,0.25);
+	border-radius: 4px;
+	border-style: solid;
+	border-width: 1px;
+	color: #111;
+	display: block;
+	font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	padding: 1px 6px;
+	position: absolute;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
+	pointer-events: none;
+	white-space: nowrap;
+	z-index: 6;
+}
+
+
+/* Instagram marker */
+.leaflet-marker-instagram { 
+	border: 2px solid #fff; 
+	box-shadow: 3px 3px 10px #888; 
+}	
+
+/* Instagram cluster */
+.leaflet-cluster-instagram img {
+	border: 2px solid #fff; 
+	box-shadow: 3px 3px 10px #888; 
+	position: relative;
+	width: 40px;
+	height: 40px;
+}
+.leaflet-cluster-instagram b {
+	position: absolute;
+	font-size: 12px;
+	top: -7px;
+	left: 34px;
+	color: #555;
+	background-color: #fff;
+	border-radius: 8px;
+	height: 12px;
+	min-width: 12px;
+	line-height: 8px;
+	text-align: center;
+	padding: 3px;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+}
+.leaflet-retina .leaflet-cluster-instagram img {
+	width: 80px;
+	height: 80px;
+}
+.leaflet-retina .leaflet-cluster-instagram b {
+	left: 68px;
+}
+
+.x-splitter {
+	background-color: #ddd;
+}
+
+.instagram {
+	background-color: #111;
+	white-space: nowrap;
+}
+
+.instagram img {
+	vertical-align: top; 	
+	display: inline-block;
+	height: 100%;
+	cursor: pointer;	
+	padding: 0;
+	margin: 0;
+}

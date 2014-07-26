@@ -1,10 +1,3 @@
-/**
- * This class is the main view for the application. It is specified in app.js as the
- * "autoCreateViewport" property. That setting automatically applies the "viewport"
- * plugin to promote that instance of this class to the body element.
- *
- * TODO - Replace this content of this view to suite the needs of your application.
- */
 Ext.define('TrackApp.view.main.MainController', {
     extend: 'Ext.app.ViewController',
 
@@ -12,7 +5,33 @@ Ext.define('TrackApp.view.main.MainController', {
         'Ext.MessageBox'
     ],
 
-    alias: 'controller.main'
+    alias: 'controller.main',
 
+    control: {
+        button: {
+            click: 'onButtonClick'
+        }
+    },
 
+    onButtonClick: function (item) {   
+        var panel = this.lookupReference(item.id),
+            bottom = this.lookupReference('bottom');
+
+        if (panel) {
+            if (this.activePanel) {
+                this.activePanel.hide();
+            }
+            if (item.pressed) {
+                bottom.show();
+                panel.show();
+                this.activePanel = panel;  
+            } else {
+                bottom.hide();
+                this.activePanel = null;
+            }
+        } else if (item.id === 'facebook') {
+            window.open('https://www.facebook.com/groups/oslo.bergen/');
+            item.setPressed(false);
+        }
+    }
 });
