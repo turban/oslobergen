@@ -71,6 +71,7 @@
 	padding: 3px;
 	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
 }
+/*
 .leaflet-retina .leaflet-cluster-instagram img {
 	width: 80px;
 	height: 80px;
@@ -78,13 +79,13 @@
 .leaflet-retina .leaflet-cluster-instagram b {
 	left: 68px;
 }
-
+*/
 .x-splitter {
 	background-color: #ddd;
 }
 
 .instagram {
-	background-color: #111;
+	background-color: #fff;
 	white-space: nowrap;
 }
 
@@ -95,4 +96,13 @@
 	cursor: pointer;	
 	padding: 0;
 	margin: 0;
+}
+
+
+.x-grid-cell-inner img {
+	vertical-align: top; 		
+}
+
+.weather-cell {
+	padding: 0;
 }

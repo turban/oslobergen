@@ -1,3 +1,4 @@
 .sencha
 build/development
 build/temp
+server/config.php

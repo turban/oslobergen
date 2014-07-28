@@ -4,6 +4,7 @@ Ext.define('TrackApp.view.positions.Positions', {
 
     requires: [
         'TrackApp.view.positions.PositionsController',
+        'Ext.grid.column.Template',
         'Ext.grid.column.Number'
     ],
 
@@ -16,15 +17,9 @@ Ext.define('TrackApp.view.positions.Positions', {
 
         },
         items: [{
-            text: 'ID',
-            dataIndex: 'id',
-            width: 80,
-            align: 'right'
-        },{
             text: 'Tid',
             dataIndex: 'time',
-            width: 130,
-            align: 'right'
+            width: 130
         },{
             text: 'Navn',
             dataIndex: 'name',
@@ -37,12 +32,18 @@ Ext.define('TrackApp.view.positions.Positions', {
             text: 'Høyde',
             dataIndex: 'alt',
             width: 100,
-            align: 'right'
+            align: 'right',
+            renderer: function (value) {
+                return value + ' m';
+            }            
         },{
             text: 'Distanse',
             dataIndex: 'x',
-            width: 100,
-            align: 'right'
+            width: 120,
+            align: 'right',
+            renderer: function (value) {
+                return Math.round(value/1000) + ' km';
+            }
         },{
             text: 'Lengdegrad',
             dataIndex: 'lng',
@@ -60,17 +61,26 @@ Ext.define('TrackApp.view.positions.Positions', {
         },{
             text: 'Vær',
             dataIndex: 'weather',
-            width: 100
+            xtype: 'templatecolumn', 
+            tpl: '<img src="http://api.yr.no/weatherapi/weathericon/1.1/?symbol={weather};content_type=image/png" width="20" height="20">',
+            width: 60, 
+            align: 'center'            
         },{
             text: 'Temperatur',
             dataIndex: 'temp',
-            width: 100,
-            align: 'right'
+            width: 90,
+            align: 'right',
+            renderer: function (value) {
+                return value + '°C';
+            }            
         },{
             text: 'Nedbør',
             dataIndex: 'precip',
             width: 100,
-            align: 'right'
+            align: 'right',
+            renderer: function (value) {
+                return value + ' mm';
+            }            
         },{
             text: 'Vind',
             dataIndex: 'wind',
@@ -79,11 +89,16 @@ Ext.define('TrackApp.view.positions.Positions', {
             text: 'Vindstyrke',
             dataIndex: 'wind_speed',
             width: 100,
-            align: 'right'
+            align: 'right',
+            renderer: function (value) {
+                return value + ' m/s';
+            }              
         },{
             text: 'Vindsretning',
             dataIndex: 'wind_dir',
-            width: 100
+            xtype: 'templatecolumn', 
+            tpl: '{[{"N":"Nord","NE":"Nordøst","E":"Øst","SE":"Sørøst","S":"Sør","SW":"Sørvest","W":"Vest","NW":"Nordvest"}[values.wind_dir] || ""]}',
+            width: 120
         }]
     },
 

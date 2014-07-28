@@ -28,7 +28,7 @@ Ext.define('TrackApp.view.main.Main', {
 			text: 'Bilder',
 			id: 'instagram'
 		},{
-			text: 'Posisjoner',
+			text: 'Posisjon',
 			id: 'positions'
 		},{
 			text: 'Facebook',

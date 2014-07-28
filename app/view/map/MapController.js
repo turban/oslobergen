@@ -2,12 +2,6 @@ Ext.define('TrackApp.view.map.MapController', {
 	extend: 'Ext.app.ViewController',
 	alias: 'controller.map',
 
-	mapOptions: {
-		maxZoom: 16
-	},
-
-	mapBounds: [[59.9, 5.1], [60.9, 11.11]],
-
 	baseLayers: [
 		L.tileLayer('http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=norges_grunnkart&zoom={z}&x={x}&y={y}', {
 			name: 'Enkelt',
@@ -55,7 +49,7 @@ Ext.define('TrackApp.view.map.MapController', {
 
 	onAfterLayout: function () {
 		if (!this.map) {
-			this.createMap(this.getView().body.dom, this.mapOptions); 
+			this.createMap(this.getView().body.dom); 
 			this.trackStore = Ext.StoreManager.lookup('Track');
  		}
 	},
@@ -110,11 +104,12 @@ Ext.define('TrackApp.view.map.MapController', {
 	},
 
 	createMap: function (id, options) {
-		var map = this.map = L.map(id, options);
+		var mapConfig = TrackApp.config.Runtime.getMap()
+			map = this.map = L.map(id, mapConfig.options);
 
 		map.attributionControl.setPrefix('');
 
-		map.fitBounds(this.mapBounds);
+		map.fitBounds(mapConfig.bounds);
 
 		this.layersControl = L.control.layers().addTo(map);
 
