@@ -15,7 +15,7 @@ Ext.define('TrackApp.Application', {
     views: [
         'map.Map',
         'profile.Profile',
-        'instagram.Instagram',
+        //'instagram.Instagram',
         'positions.Positions'
     ],
 

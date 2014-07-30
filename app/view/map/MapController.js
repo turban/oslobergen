@@ -21,7 +21,7 @@ Ext.define('TrackApp.view.map.MapController', {
 		'<tpl if="weather"><p><img src="http://api.yr.no/weatherapi/weathericon/1.1/?symbol={weather};content_type=image/png" width="38" height="38" style="float:right;">{temp}°C - {precip} mm<br>{wind},<br>{wind_speed} m/s fra {[{"N":"nord","NE":"nordøst","E":"øst","SE":"sørøst","S":"sør","SW":"sørvest","W":"vest","NW":"nordvest"}[values.wind_dir] || ""]}</p><p>Værdata fra <a href="http://api.yr.no">api.yr.no</a></p></tpl>'
 	),
 	miniPopupTemplate: new Ext.XTemplate('<tpl if="name">{name}<tpl else>{time}</tpl>'), 
-	instaTemplate: new Ext.XTemplate('<a href="{link}" title="View on Instagram"><img src="{image_standard}" width="100%"/></a><p>{caption}</a></p>'),
+	instaTemplate: new Ext.XTemplate('<a href="{link}" title="View on Instagram"><img src="{image_standard}" width="100%"/></a><p>{caption} {time}</a></p>'),
 
 	control: {
 		'#': {  // matches the view itself
@@ -36,12 +36,15 @@ Ext.define('TrackApp.view.map.MapController', {
                 showpoint:   'showMarker',
                 hidepoint:   'hideMarker',
                 selectpoint: 'selectMarker',
-                mapbounds:   'setMapBounds'
+                mapbounds:   'setMapBounds',
+                instashow:   'showInstagram',
+                instahide:   'hideInstagram'
             }
         },
         store: {
             '*': {
                 trackdata: 'onTrackData',
+                addstop: 'addStop',
                 instagram: 'onInstagram'
             }        	
         }
@@ -70,42 +73,17 @@ Ext.define('TrackApp.view.map.MapController', {
 	},
 
 	onInstagram: function (images) {
-		if (!this.instagram) { // First load
-			var photos = Ext.StoreManager.lookup('Instagram').getProxy().getReader().rawData.rows;
-			this.instagram = L.instagram.cluster().addData(photos).addTo(this.map);
-
-			this.instagram.on('click clusterclick', function (evt) {
-				var layer = evt.layer, 
-					gallery = []
-					instagram;
-
-				if (evt.type === 'click') {
-					gallery.push(this.galleryItem(layer.instagram));
-				} else {
-					var photos = layer.getAllChildMarkers();
-					for (var i = 0, len = photos.length; i < len; i++) {
-						gallery.push(this.galleryItem(photos[i].instagram));
-					}
-				}
-
-				$.fancybox(gallery, {
-					helpers: { title: { type: 'inside' } },
-					aspectRatio: true,
-					autoSize: false,
-					width: 640,
-					height: 640
-				});	
-			}, this);
-		} else {
-			for (var i = 0, len = images.length; i < len; i++) {
-				this.instagram.addData([images[i].data]);
-			}
+		for (var i = 0, len = images.length; i < len; i++) {
+			this.instagram.addData([images[i].data]);
 		}
 	},
 
-	createMap: function (id, options) {
+	createMap: function (id) {
 		var mapConfig = TrackApp.config.Runtime.getMap()
-			map = this.map = L.map(id, mapConfig.options);
+			map = this.map = L.map(id, {
+                minZoom: 4,				
+                maxZoom: 16
+            });
 
 		map.attributionControl.setPrefix('');
 
@@ -132,7 +110,65 @@ Ext.define('TrackApp.view.map.MapController', {
             className: 'leaflet-marker-live'            
         });
 
-		//this.loadInstagram();
+		this.stops = L.featureGroup().addTo(this.map);
+
+		if (mapConfig.start) {
+			this.start = L.marker(mapConfig.start.latlng, {
+				icon: L.MakiMarkers.icon({ 
+                    icon: 'circle-stroked', 
+                    color: '#145291', 
+                    size: 'm' 
+                })
+			}).bindPopup('<strong>' + mapConfig.start.name + '</strong><br>' + mapConfig.start.description);
+			map.addLayer(this.start);
+		}
+
+		if (mapConfig.end) {
+			this.end = L.marker(mapConfig.end.latlng, {
+				icon: L.MakiMarkers.icon({ 
+                    icon: 'bar', 
+                    color: '#145291', 
+                    size: 'm' 
+                })
+			}).bindPopup('<strong>' + mapConfig.end.name + '</strong><br>' + mapConfig.end.description);
+			map.addLayer(this.end);
+		}
+
+		this.instagram = L.instagram.cluster();
+
+		this.instagram.on('click clusterclick', function (evt) {
+			var layer = evt.layer, 
+				gallery = []
+				instagram;
+
+			if (evt.type === 'click') {
+				gallery.push(this.galleryItem(layer.instagram));
+			} else {
+				var photos = layer.getAllChildMarkers();
+				for (var i = 0, len = photos.length; i < len; i++) {
+					gallery.push(this.galleryItem(photos[i].instagram));
+				}
+			}
+
+			$.fancybox(gallery, {
+				helpers: { title: { type: 'inside' } },
+				aspectRatio: true,
+				autoSize: false,
+				width: 640,
+				height: 640
+			});	
+		}, this);
+
+		this.gpx = L.polyline([], { 
+            opacity: 0.8,
+            weight: 3      
+        });
+
+		this.layersControl.addOverlay(this.stops, 'Overnatting');
+		this.layersControl.addOverlay(this.instagram, 'Bilder');	
+		this.layersControl.addOverlay(this.gpx, 'GPS-spor');	
+
+		this.map.on('overlayadd', this.onOverlayAdd, this);	
 	},
 
 	firstDraw: function (data) {
@@ -155,12 +191,23 @@ Ext.define('TrackApp.view.map.MapController', {
 		this.hitPolyline.on('click', this.onLineClick, this);
 		this.hitPolyline.on('mousemove', this.onMouseMove, this);
 		this.hitPolyline.on('mousemout', this.onMouseOut, this);
+
 		this.marker.on('mousemove', this.onMouseMove, this);
 		this.marker.on('mouseout', this.onMouseOut, this);
 		this.marker.on('click', this.onMarkerClick, this);
+
+		this.liveMarker.on('mousemove', this.onMouseMove, this);
+		this.liveMarker.on('mouseout', this.onMouseOut, this);
+		this.liveMarker.on('click', this.onMarkerClick, this);
+
+		this.stops.on('mouseover', this.onMouseMove, this);
+		this.stops.on('mouseout', this.onMouseOut, this);
+		this.stops.on('click', this.onStopClick, this);
+
 		this.marker.bindLabel('');
 
 		this.map.addLayer(this.liveMarker.setLatLng(data[data.length - 1]));
+		this.liveMarker.data = data;
 	},
 
 	addTrackData: function (data) {
@@ -171,6 +218,20 @@ Ext.define('TrackApp.view.map.MapController', {
             this.hitPolyline.addLatLng(point);
 		}
 		this.liveMarker.setLatLng(point);
+		this.liveMarker.data = data;
+	},
+
+	addStop: function (stop) {
+		var marker = L.marker(stop, {
+			icon: L.MakiMarkers.icon({ 
+            	icon: (stop.type === 'OK') ? 'building' : 'campsite', 
+                color: '#145291', 
+                size: 'm' 
+            })	
+		}).bindPopup('Popup!');
+		marker.data = stop;
+
+		this.stops.addLayer(marker);
 	},
 
 	addBaseLayers: function (layers) {
@@ -186,12 +247,12 @@ Ext.define('TrackApp.view.map.MapController', {
 			return {
 				type: 'inline',
 				content: '<video autoplay controls poster="' + data.image_standard + '"><source src="' + data.video_standard + '" type="video/mp4"/></video>',
-				title: data.caption
+				title: data.caption + '<span style="color:#aaa;"> - ' + data.time + '</span>'
 			};	
 		}
 		return {
 			href: data.image_standard,
-			title: data.caption
+			title: data.caption + '<span style="color:#aaa;"> - ' + data.time + '</span>'
 		};	
 	},
 
@@ -216,9 +277,25 @@ Ext.define('TrackApp.view.map.MapController', {
 		this.showPopup(evt.target);
 	},
 
+	onStopClick: function (evt) {
+		this.showPopup(evt.layer);
+	},
+
 	onBoundsChange: function () {
 		var bounds = this.map.getBounds();
 		this.fireEvent('mapboundschange', [bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()]);
+	},
+
+	onOverlayAdd: function (evt) {
+		if (evt.layer === this.gpx && !this.gpx.getLatLngs().length) {
+			var self = this;
+			Ext.data.JsonP.request({
+				url: 'http://turban.cartodb.com/api/v2/sql?q=SELECT latitude AS lat, longitude AS lng FROM gpx ORDER BY timestamp ASC',
+				success: function(data) {
+					self.gpx.setLatLngs(data.rows);
+				}
+			});
+		}
 	},
 
 	showMarker: function (point) {
@@ -243,7 +320,6 @@ Ext.define('TrackApp.view.map.MapController', {
 
 	selectMarker: function (point, miniPopup) {
 		var marker = this.showMarker(point);
-
 		if (!miniPopup) {
 			this.showPopup(marker);
 		} else {
@@ -256,12 +332,14 @@ Ext.define('TrackApp.view.map.MapController', {
 		if (marker.data.alt !== null) {
 			marker.label.setLatLng(marker.data);
 			marker.updateLabelContent(this.labelTemplate.apply(marker.data)); 
+			marker.showLabel();
 		} else {
 			marker.hideLabel();
 		}
 	},
 
 	showPopup: function (marker) {
+		console.log(marker.data);
 		marker.bindPopup(this.popupTemplate.apply(marker.data)).openPopup();
 		marker.hideLabel();
 	},
@@ -273,6 +351,20 @@ Ext.define('TrackApp.view.map.MapController', {
 
     setMapBounds: function (bounds) {
     	this.map.fitBounds([[bounds[1],bounds[0]],[bounds[3],bounds[2]]]);
+    },
+
+    showInstagram: function () {
+    	this.map.removeLayer(this.stops);
+    	this.map.removeLayer(this.start);
+    	this.map.removeLayer(this.end);    	    	
+    	this.map.addLayer(this.instagram);
+    },
+
+    hideInstagram: function () {
+    	this.map.removeLayer(this.instagram); 
+    	this.map.addLayer(this.stops);  
+    	this.map.addLayer(this.start);  
+    	this.map.addLayer(this.end);      	    	 	
     }
 
 });

@@ -91,7 +91,7 @@ Ext.define('TrackApp.view.profile.ProfileController', {
                 mapboundschange: 'zoomToBounds',
                 mappointshow: 'onMapPointShow',
                 mappointhide: 'onMapPointHide'
-            },
+            }
         },
         store: {
             '*': {

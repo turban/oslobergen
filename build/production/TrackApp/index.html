@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta property="og:image" content="resources/img/oslobergen.jpg" />
 
     <title>oslobergen.no</title>
 
@@ -17,6 +19,7 @@
 	<script src="resources/lib/leaflet.label/leaflet.label.js"></script>
 	<script src="resources/lib/cluster/leaflet.markercluster.js"></script>		
 	<script src="resources/lib/Leaflet.Instagram.js"></script>
+	<script src="resources/lib/Leaflet.MakiMarkers.js"></script>		
 
 	<script src="resources/lib/crossfilter/crossfilter.js"></script>	
 	<script src="resources/lib/sphere-knn.js"></script>	
@@ -45,7 +48,18 @@ e=!m&&!d;l=g["MSIE 10"];p=g.Blackberry||g.BB;t(q,n.loadPlatformsParam(),{phone:m
 d=k.length;for(e=0;e<d;e++)l=k[e].split(":")}return l},initPlatformTags:function(){n.detectPlatformTags()},getPlatformTags:function(){return n.platformTags},filterPlatform:function(d){d=[].concat(d);var m=n.getPlatformTags(),e,k,l;e=d.length;for(k=0;k<e;k++)if(l=d[k],m.hasOwnProperty(l))return!!m[l];return!1},init:function(){n.initPlatformTags();Ext.filterPlatform=n.filterPlatform},initManifest:function(d){n.init();d=d||Ext.manifest;"string"===typeof d&&(d=l.fetchSync(l.baseUrl+d+".json"),d=JSON.parse(d.content));
 return Ext.manifest=d},load:function(d){d=n.initManifest(d);var m=d.loadOrder,e=m?l.createLoadOrderMap(m):null,k=[],p=(d.js||[]).concat(d.css||[]),q,g,s,h,a=function(){u=!0;n.notify()};s=p.length;for(g=0;g<s;g++)q=p[g],h=!0,q.platform&&!n.filterPlatform(q.platform)&&(h=!1),h&&k.push(q.path);m&&(d.loadOrderMap=e);l.load({url:k,loadOrder:m,loadOrderMap:e,sequential:!0,success:a,failure:a})},onMicroloaderReady:function(d){u?d():p.push(d)},notify:function(){for(var d;d=p.shift();)d()}};return n}();
 Ext.manifest=Ext.manifest||"bootstrap";Ext.Microloader.load();</script>
-
 </head>
-<body></body>
+<body>
+	
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53357406-1', 'auto');
+  ga('send', 'pageview');
+</script>	
+
+</body>
 </html>

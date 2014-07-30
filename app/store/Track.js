@@ -32,8 +32,10 @@ Ext.define('TrackApp.store.Track', {
         }
 
         for (var i = 0, len = points.length, date; i < len; i++) {
-            point = points[i].data,
-            //point.set('x', this.getDistance(point.data, this.prevPoint)); // Gives error in Grid
+            point = points[i].data;
+            if (point.type === 'OK' || point.type === 'CUSTOM') {
+                this.fireEvent('addstop', point);
+            }
             point.x = this.getDistance(point, this.prevPoint);
             this.prevPoint = point;  
         }

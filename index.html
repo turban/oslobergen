@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta property="og:image" content="resources/img/oslobergen.jpg" />
 
     <title>oslobergen.no</title>
 
@@ -17,13 +19,25 @@
 	<script src="resources/lib/leaflet.label/leaflet.label.js"></script>
 	<script src="resources/lib/cluster/leaflet.markercluster.js"></script>		
 	<script src="resources/lib/Leaflet.Instagram.js"></script>
+	<script src="resources/lib/Leaflet.MakiMarkers.js"></script>		
 
 	<script src="resources/lib/crossfilter/crossfilter.js"></script>	
 	<script src="resources/lib/sphere-knn.js"></script>	
 
     <!-- The line below must be kept intact for Sencha Cmd to build your application -->
     <script id="microloader" type="text/javascript" src="bootstrap.js"></script>
-
 </head>
-<body></body>
+<body>
+	
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53357406-1', 'auto');
+  ga('send', 'pageview');
+</script>	
+
+</body>
 </html>

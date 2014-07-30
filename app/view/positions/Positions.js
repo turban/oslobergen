@@ -62,7 +62,7 @@ Ext.define('TrackApp.view.positions.Positions', {
             text: 'Vær',
             dataIndex: 'weather',
             xtype: 'templatecolumn', 
-            tpl: '<img src="http://api.yr.no/weatherapi/weathericon/1.1/?symbol={weather};content_type=image/png" width="20" height="20">',
+            tpl: '<tpl if="weather"><img src="http://api.yr.no/weatherapi/weathericon/1.1/?symbol={weather};content_type=image/png" width="20" height="20"></tpl>',
             width: 60, 
             align: 'center'            
         },{
@@ -71,7 +71,7 @@ Ext.define('TrackApp.view.positions.Positions', {
             width: 90,
             align: 'right',
             renderer: function (value) {
-                return value + '°C';
+                return (value !== null) ? value + '°C' : '';
             }            
         },{
             text: 'Nedbør',
@@ -79,7 +79,7 @@ Ext.define('TrackApp.view.positions.Positions', {
             width: 100,
             align: 'right',
             renderer: function (value) {
-                return value + ' mm';
+                return (value !== null) ? value + ' mm' : '';
             }            
         },{
             text: 'Vind',
@@ -91,7 +91,7 @@ Ext.define('TrackApp.view.positions.Positions', {
             width: 100,
             align: 'right',
             renderer: function (value) {
-                return value + ' m/s';
+                return (value !== null) ? value + ' m/s' : '';
             }              
         },{
             text: 'Vindsretning',

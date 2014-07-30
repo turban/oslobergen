@@ -22,17 +22,22 @@ Ext.define('TrackApp.view.main.Main', {
 			toggleGroup: 'menu'
 		},
 		items: [{
-			text: 'Høydeprofil',
-			id: 'profile'
-		},{
 			text: 'Bilder',
 			id: 'instagram'
+		},{
+			text: 'Høydeprofil',
+			id: 'profile'
 		},{
 			text: 'Posisjon',
 			id: 'positions'
 		},{
 			text: 'Facebook',
-			id: 'facebook'
+			id: 'facebookUrl',
+			reference: 'facebookBtn'
+		},{
+			text: 'Instagram',
+			id: 'instagramUrl',
+			reference: 'instagramBtn'
 		}]
 	},
 
@@ -56,14 +61,11 @@ Ext.define('TrackApp.view.main.Main', {
 			type: 'fit'
 		},
 		defaults: {
-			hidden: true,
+			hidden: true
 		},
 		items: [{
 			reference: 'profile',
 			xtype: 'profile' 
-		},{
-			reference: 'instagram',
-			xtype: 'instagram'			
 		},{
 			reference: 'positions',
 			xtype: 'positions'

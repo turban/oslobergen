@@ -4,7 +4,18 @@ Ext.define('TrackApp.config.Runtime',{
         map: {
             bounds: [[59.9, 5.1], [60.9, 11.11]],
             options: {
-                maxZoom: 16
+                maxZoom: 16,
+                minZoom: 6
+            },
+            start: {
+                name: 'Lillogata',
+                description: 'Start', 
+                latlng: [59.94284, 10.76779]
+            },
+            end: {
+                name: 'Nordåsgrenda',
+                description: 'Mål', 
+                latlng: [60.3096, 5.32355]
             }
         },
     	track: {
@@ -18,6 +29,9 @@ Ext.define('TrackApp.config.Runtime',{
         	timestamp: 1406487326,
         	url: Ext.create('Ext.XTemplate', "http://turban.cartodb.com/api/v2/sql?q=SELECT * FROM instagram <tpl if='timestamp'>WHERE timestamp > {timestamp} </tpl>ORDER BY timestamp DESC"),
         	interval: 5 // Minutes
+        },
+        gpx: {
+            url: "http://turban.cartodb.com/api/v2/sql?q=SELECT latitude AS lat, longitude AS lng FROM gpx ORDER BY timestamp ASC"           
         }
     },
     constructor: function (config){
